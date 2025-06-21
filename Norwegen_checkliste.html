@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komplette Packliste: Hochsee-Angeln Norwegen (10 Tage)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 20 L80 20 L50 80 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: wave 20s linear infinite;
+            opacity: 0.1;
+        }
+
+        @keyframes wave {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #ff7b7b, #ff6b6b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .category {
+            margin-bottom: 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .category:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-icon {
+            font-size: 1.5em;
+        }
+
+        .category-content {
+            padding: 25px;
+            background: #fafafa;
+        }
+
+        .setup-group {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #667eea;
+        }
+
+        .setup-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 10px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #667eea;
+        }
+
+        .item-name {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+
+        .item-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        .summary {
+            position: sticky;
+            top: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid #4CAF50;
+            z-index: 50;
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* === OPTIMIERTE DRUCKFORMATIERUNG === */
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                font-size: 10pt;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                max-width: 100%;
+            }
+            .header {
+                text-align: left;
+                padding: 10px 0;
+                background: #fff !important;
+                color: #000 !important;
+                border-bottom: 2px solid #000;
+            }
+            .header h1 { font-size: 18pt; }
+            .header p, .header::before, .progress-bar, .summary, .print-button, .info-box, .item:hover {
+                display: none;
+            }
+            .content {
+                padding: 0;
+            }
+            .category {
+                border: 1px solid #ccc;
+                margin-bottom: 15px;
+                page-break-inside: avoid; /* Versucht, Umbrüche innerhalb einer Kategorie zu vermeiden */
+            }
+            .category-header {
+                background: #eee !important;
+                color: #000 !important;
+                padding: 8px;
+                font-size: 12pt;
+            }
+            .category-icon { font-size: 1em; }
+            .category-content { padding: 10px; }
+            .setup-group {
+                box-shadow: none;
+                border: none;
+                border-top: 1px solid #eee;
+                padding: 10px 5px;
+                margin-bottom: 5px;
+                page-break-inside: avoid;
+            }
+            .setup-title {
+                font-size: 11pt;
+                margin-bottom: 8px;
+            }
+            .item-list {
+                display: block; /* Stellt sicher, dass alles untereinander steht */
+            }
+            .item {
+                padding: 4px 0;
+            }
+            .item-count {
+                background: #ddd !important;
+                color: #000 !important;
+                font-size: 0.8em;
+            }
+            input[type="checkbox"] {
+                transform: scale(1.0); /* Normale Größe für den Druck */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .content { padding: 20px; }
+            .item-list { grid-template-columns: 1fr; }
+            .summary { position: static; margin-bottom: 20px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🎣 Komplette Packliste: Hochsee-Angeln</h1>
+            <p>Ausrüstung & Persönliches für 10 Tage Norwegen</p>
+        </div>
+
+        <div class="content">
+            <div class="info-box">
+                <h3>📋 Wichtige Hinweise für Ihre Norwegen-Tour</h3>
+                <p>Diese Checkliste umfasst die komplette Angelausrüstung sowie persönliche Gegenstände für einen 10-tägigen Hochsee-Angelurlaub. Die Stückzahlen sind für intensive Angeltage kalkuliert und berücksichtigen Reservematerial.</p>
+                <p><strong>Mindestmaß Heilbutt 2025:</strong> 84cm | <strong>Beste Angelzeit:</strong> Mai - September</p>
+            </div>
+
+            <div class="summary">
+                <h3>📊 Packlisten-Fortschritt</h3>
+                <p>Abgehakt: <span id="checkedCount">0</span> von <span id="totalCount">0</span> Artikeln</p>
+                <div style="background: #f0f0f0; height: 10px; border-radius: 5px; margin: 10px 0;">
+                    <div id="progressFill" style="background: linear-gradient(135deg, #4CAF50, #45a049); height: 100%; border-radius: 5px; width: 0%; transition: width 0.3s ease;"></div>
+                </div>
+                <button class="print-button" onclick="window.print()">🖨️ Checkliste drucken</button>
+            </div>
+
+            <!-- Kleidung & Schutzbekleidung -->
+            <div class="category">
+                <div class="category-header">
+                    <span class="category-icon">👕</span>
+                    <span>Kleidung & Schutzbekleidung (Zwiebelprinzip)</span>
+                </div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Outer Layer (Wasserdicht & Winddicht)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="floatanzug"><label for="floatanzug" class="item-name">Floatanzug (2-teilig, zertifiziert)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="hochseejacke"><label for="hochseejacke" class="item-name">Alternative: Hochsee-Segeljacke</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="hochseehose"><label for="hochseehose" class="item-name">Alternative: Hochsee-Segelhose (Latzhose)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Mid Layer (Isolation)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="fleecejacken"><label for="fleecejacken" class="item-name">Fleecejacken / Fleecepullover</label><span class="item-count">3x</span></div>
+                            <div class="item"><input type="checkbox" id="fleecehose"><label for="fleecehose" class="item-name">Fleecehose</label><span class="item-count">2x</span></div>
+                            <div class="item"><input type="checkbox" id="daunenweste"><label for="daunenweste" class="item-name">Daunen- oder Kunstfaserweste</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                     <div class="setup-group">
+                        <div class="setup-title"><span>Base Layer (Funktionsunterwäsche)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="funktionsshirts"><label for="funktionsshirts" class="item-name">Funktionsshirts (langarm, Merinowolle/Synthetik)</label><span class="item-count">5x</span></div>
+                            <div class="item"><input type="checkbox" id="funktionshosen"><label for="funktionshosen" class="item-name">Funktionsunterhosen (lang)</label><span class="item-count">4x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Freizeitkleidung (für die Unterkunft)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="tshirts"><label for="tshirts" class="item-name">T-Shirts</label><span class="item-count">7x</span></div>
+                            <div class="item"><input type="checkbox" id="freizeithose"><label for="freizeithose" class="item-name">Jeans / Bequeme Hosen</label><span class="item-count">2x</span></div>
+                            <div class="item"><input type="checkbox" id="hoodie"><label for="hoodie" class="item-name">Pullover / Hoodie</label><span class="item-count">2x</span></div>
+                             <div class="item"><input type="checkbox" id="unterwaesche"><label for="unterwaesche" class="item-name">Unterwäsche</label><span class="item-count">10x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schuhe, Socken & Accessoires -->
+            <div class="category">
+                <div class="category-header">
+                    <span class="category-icon">👟</span>
+                    <span>Schuhe, Socken & Accessoires</span>
+                </div>
+                <div class="category-content">
+                     <div class="setup-group">
+                        <div class="setup-title"><span>Schuhwerk</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="seestiefel"><label for="seestiefel" class="item-name">Hochsee-Gummistiefel (rutschfest, gefüttert)</label><span class="item-count">1 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="huettenschuhe"><label for="huettenschuhe" class="item-name">Bequeme Schuhe für die Unterkunft</label><span class="item-count">1 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="badeschuhe"><label for="badeschuhe" class="item-name">Badeschuhe / Flip-Flops (für Dusche)</label><span class="item-count">1 Paar</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Socken & Kopfbedeckung</span></div>
+                        <div class="item-list">
+                             <div class="item"><input type="checkbox" id="thermosocken"><label for="thermosocken" class="item-name">Dicke Woll- / Thermosocken</label><span class="item-count">8 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="normalsocken"><label for="normalsocken" class="item-name">Normale Socken</label><span class="item-count">5 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="muetze"><label for="muetze" class="item-name">Warme Mütze (Wolle/Fleece)</label><span class="item-count">2x</span></div>
+                            <div class="item"><input type="checkbox" id="sturmhaube"><label for="sturmhaube" class="item-name">Sturmhaube / Buff / Schlauchtuch</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="sonnenhut"><label for="sonnenhut" class="item-name">Kappe / Sonnenhut</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Handschuhe & Augenschutz</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="angelhandschuhe"><label for="angelhandschuhe" class="item-name">Neopren- oder wasserdichte Angelhandschuhe</label><span class="item-count">2 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="warmhandschuhe"><label for="warmhandschuhe" class="item-name">Warme Fleece-/Wollhandschuhe (für Pausen)</label><span class="item-count">1 Paar</span></div>
+                            <div class="item"><input type="checkbox" id="polbrille"><label for="polbrille" class="item-name">Polarisationsbrille</label><span class="item-count">2x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Persönliche Ausrüstung & Hygiene -->
+            <div class="category">
+                <div class="category-header">
+                    <span class="category-icon">⛑️</span>
+                    <span>Persönliche Ausrüstung & Hygiene</span>
+                </div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Kulturbeutel</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="zahnpflege"><label for="zahnpflege" class="item-name">Zahnbürste & Zahncreme</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="duschgel"><label for="duschgel" class="item-name">Duschgel / Seife (biologisch abbaubar)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="deo"><label for="deo" class="item-name">Deodorant</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="sonnencreme"><label for="sonnencreme" class="item-name">Sonnencreme (LSF 50+, wasserfest)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="lippenpflege"><label for="lippenpflege" class="item-name">Lippenpflege mit LSF</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="handtuch"><label for="handtuch" class="item-name">Schnelltrocknende Handtücher</label><span class="item-count">2x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Reiseapotheke & Erste Hilfe</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="medikamente_pers"><label for="medikamente_pers" class="item-name">Persönliche Medikamente</label><span class="item-count">Bedarf</span></div>
+                            <div class="item"><input type="checkbox" id="seekrankheit"><label for="seekrankheit" class="item-name">Tabletten gegen Seekrankheit</label><span class="item-count">Bedarf</span></div>
+                            <div class="item"><input type="checkbox" id="schmerzmittel"><label for="schmerzmittel" class="item-name">Schmerzmittel (z.B. Ibuprofen)</label><span class="item-count">1 Pckg.</span></div>
+                            <div class="item"><input type="checkbox" id="erstehilfeset"><label for="erstehilfeset" class="item-name">Erste-Hilfe-Set (wasserfest verpackt)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="blasenpflaster"><label for="blasenpflaster" class="item-name">Blasenpflaster</label><span class="item-count">1 Pckg.</span></div>
+                             <div class="item"><input type="checkbox" id="desinfektion"><label for="desinfektion" class="item-name">Desinfektionsmittel</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dokumente, Elektronik & Sonstiges -->
+            <div class="category">
+                <div class="category-header">
+                    <span class="category-icon">🛂</span>
+                    <span>Dokumente, Elektronik & Sonstiges</span>
+                </div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Wichtige Dokumente</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="ausweis"><label for="ausweis" class="item-name">Personalausweis / Reisepass</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="fuehrerschein"><label for="fuehrerschein" class="item-name">Führerschein</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="angelpapiere"><label for="angelpapiere" class="item-name">Angelpapiere / Lizenzen (falls nötig)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="krankenkasse"><label for="krankenkasse" class="item-name">Auslandskrankenversicherung / EHIC</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="reiseunterlagen"><label for="reiseunterlagen" class="item-name">Reiseunterlagen (Tickets, Buchungen)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>Elektronik</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="smartphone"><label for="smartphone" class="item-name">Smartphone & wasserdichte Hülle</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="powerbank"><label for="powerbank" class="item-name">Powerbank (mit hoher Kapazität)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="ladekabel"><label for="ladekabel" class="item-name">Ladekabel für alle Geräte</label><span class="item-count">2x pro Typ</span></div>
+                            <div class="item"><input type="checkbox" id="stirnlampe"><label for="stirnlampe" class="item-name">Stirnlampe (mit Rotlichtfunktion)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="kamera"><label for="kamera" class="item-name">Kamera / GoPro inkl. Zubehör</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="reiseadapter"><label for="reiseadapter" class="item-name">Reiseadapter für Steckdosen</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                     <div class="setup-group">
+                        <div class="setup-title"><span>Nützliches & Verpflegung</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="thermoskanne"><label for="thermoskanne" class="item-name">Thermoskanne für heiße Getränke</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="trinkflasche"><label for="trinkflasche" class="item-name">Wiederverwendbare Trinkflasche</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="snacks"><label for="snacks" class="item-name">Snacks für das Boot (Riegel, Nüsse)</label><span class="item-count">Bedarf</span></div>
+                            <div class="item"><input type="checkbox" id="muellbeutel"><label for="muellbeutel" class="item-name">Müllbeutel (Leave no Trace!)</label><span class="item-count">1 Rolle</span></div>
+                            <div class="item"><input type="checkbox" id="panzertape"><label for="panzertape" class="item-name">Panzertape / Gaffer-Tape</label><span class="item-count">1 Rolle</span></div>
+                            <div class="item"><input type="checkbox" id="buch"><label for="buch" class="item-name">Buch / E-Reader für die Abende</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bootsruten-Setup -->
+            <div class="category">
+                <div class="category-header">
+                    <span class="category-icon">🎣</span>
+                    <span>Bootsruten-Setup für Naturköder</span>
+                </div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title">
+                            <span>⚡</span>
+                            <span>Schwere Naturköder-Kombination (30lbs+)</span>
+                        </div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="bootsrute1"><label for="bootsrute1" class="item-name">Westin W4 Boat 2nd (30-50lbs, 2,20m)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="multirolle1"><label for="multirolle1" class="item-name">Avet MXJ 5.8 G2 MC Multirolle</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="hauptschnur1"><label for="hauptschnur1" class="item-name">Daiwa J-Braid X8 Multicolor (0,28mm, 500m)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="ersatzschnur1"><label for="ersatzschnur1" class="item-name">Ersatzschnur J-Braid X8 (300m)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🔧</span><span>Zubehör für Bootsruten-Setup</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="vorfach1"><label for="vorfach1" class="item-name">Maxima Ultra Green Vorfach (100lbs)</label><span class="item-count">50m</span></div>
+                            <div class="item"><input type="checkbox" id="fluoro1"><label for="fluoro1" class="item-name">Fluorocarbon Vorfach (0,90mm)</label><span class="item-count">30m</span></div>
+                            <div class="item"><input type="checkbox" id="circlechooks"><label for="circlechooks" class="item-name">VMC 9788 PS Circle Hooks (8/0-12/0)</label><span class="item-count">30 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="wirbel1"><label for="wirbel1" class="item-name">VMC 3261 Rolling Swivel (Gr. 4-6)</label><span class="item-count">20 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="bleie1"><label for="bleie1" class="item-name">Grundbleie (100-400g sortiert)</label><span class="item-count">15 Stk</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spinnruten-Setup -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">🌊</span><span>Spinnruten-Setup für aktives Angeln</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>⚡</span><span>Schwere Spinn-Kombination (bis 190g)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="spinnrute1"><label for="spinnrute1" class="item-name">Shimano Grappler Type C (2,49m, 100-190g)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="stationaer1"><label for="stationaer1" class="item-name">Shimano Saragosa SW-A 6000 HG</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="hauptschnur2"><label for="hauptschnur2" class="item-name">Shimano Kairiki 4 (0,315mm, 500m)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="ersatzschnur2"><label for="ersatzschnur2" class="item-name">Ersatzschnur Kairiki 4 (300m)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+
+                    <!-- == NEU: Leichte Spinn-Kombination == -->
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🍃</span><span>Leichte Spinn-Kombination (bis 120g)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="spinnrute2"><label for="spinnrute2" class="item-name">Westin W3 Powershad (2,40m, 40-120g)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="stationaer2"><label for="stationaer2" class="item-name">Daiwa BG MQ 4000D-XH</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="hauptschnur3"><label for="hauptschnur3" class="item-name">Daiwa J-Braid X8 Multicolor (0,18mm, 300m)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🎯</span><span>Kunstköder und Jig-Zubehör</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="jigheads_schwer"><label for="jigheads_schwer" class="item-name">Giant Jigheads (150-300g)</label><span class="item-count">20 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="gummifische_gross"><label for="gummifische_gross" class="item-name">Große Gummifische (18-25cm, div. Farben)</label><span class="item-count">15 Stk</span></div>
+                            <!-- == NEU: Leichte Köder == -->
+                            <div class="item"><input type="checkbox" id="jigheads_leicht"><label for="jigheads_leicht" class="item-name">Jigheads (60-120g)</label><span class="item-count">15 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="gummifische_klein"><label for="gummifische_klein" class="item-name">Gummifische (12-16cm, für Seelachs/Dorsch)</label><span class="item-count">15 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="assist"><label for="assist" class="item-name">Assist Hooks für Jigs (6/0-8/0)</label><span class="item-count">20 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="wirbel2"><label for="wirbel2" class="item-name">Fastlock Snaps (Gr. 3-5)</label><span class="item-count">15 Stk</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reserve-Ausrüstung -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">🔄</span><span>Reserve-Ausrüstung und Kleinteile</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>⚠️</span><span>Notfall-Reserven für 10 Angeltage</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="reserverute"><label for="reserverute" class="item-name">Reserve Bootsrute (Penn Regiment IV)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="reserverolle"><label for="reserverolle" class="item-name">Reserve Multirolle (Daiwa Sealine)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="sprengring"><label for="sprengring" class="item-name">Sprengringe (Gr. 6-10, salzwasserfest)</label><span class="item-count">30 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="einzelhaken"><label for="einzelhaken" class="item-name">Einzelhaken (6/0-10/0 sortiert)</label><span class="item-count">25 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="krimps"><label for="krimps" class="item-name">Crimps/Quetschhülsen</label><span class="item-count">50 Stk</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Werkzeuge und Hilfsmittel -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">🔧</span><span>Werkzeuge und Hilfsmittel</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🛠️</span><span>Unverzichtbare Werkzeuge</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="sprengringzange"><label for="sprengringzange" class="item-name">Sprengringzange (salzwasserfest)</label><span class="item-count">2x</span></div>
+                            <div class="item"><input type="checkbox" id="crimppzange"><label for="crimppzange" class="item-name">Crimppzange</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="messer"><label for="messer" class="item-name">Filetiermesser (rostfreier Stahl)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="gaff"><label for="gaff" class="item-name">Flying Gaff (teleskopisch)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="multitool"><label for="multitool" class="item-name">Multitool mit Zange</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="masstab"><label for="masstab" class="item-name">Fischmaßstab (bis 150cm)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pilker-Setup -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">⚓</span><span>Pilker-Setup für vertikales Angeln</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🎯</span><span>Pilk-Kombination (100-500g)</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="pilkrute"><label for="pilkrute" class="item-name">Pilkrute (2,40m, 200-500g, fast action)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="pilkrolle"><label for="pilkrolle" class="item-name">Multirolle mit Schnurzähler (Penn Squall)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="pilkschnur"><label for="pilkschnur" class="item-name">Geflochtene Schnur (0,35mm, 600m)</label><span class="item-count">1x</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🔨</span><span>Pilker-Sortiment</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="pilker100"><label for="pilker100" class="item-name">Pilker 100-150g (Dorsch, flache Bereiche)</label><span class="item-count">8 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="pilker200"><label for="pilker200" class="item-name">Pilker 200-250g (Standard Tiefwasser)</label><span class="item-count">12 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="pilker350"><label for="pilker350" class="item-name">Pilker 350-400g (Strömung, große Tiefen)</label><span class="item-count">10 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="pilker500"><label for="pilker500" class="item-name">Pilker 500g+ (Extrembedingungen)</label><span class="item-count">6 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="beifaenger"><label for="beifaenger" class="item-name">Beifänger/Oktopus-Systeme</label><span class="item-count">15 Stk</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kleinmaterial und Montage-Zubehör -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">🔗</span><span>Kleinmaterial für Montagen</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>⚙️</span><span>Wirbel und Verbindungselemente</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="toennchenwirbel"><label for="toennchenwirbel" class="item-name">Tönnchen-Wirbel Gr. 2-6 (25-60kg)</label><span class="item-count">30 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="kugellagerwirbel"><label for="kugellagerwirbel" class="item-name">Kugellager-Wirbel Gr. 4-8</label><span class="item-count">25 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="fastlocksnap"><label for="fastlocksnap" class="item-name">Fastlock-Snaps Gr. 2-5</label><span class="item-count">40 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="coastlocksnap"><label for="coastlocksnap" class="item-name">Coastlock-Snaps Gr. 3-6</label><span class="item-count">25 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="sprengring2"><label for="sprengring2" class="item-name">Sprengringe Gr. 4-12 (salzwasserfest)</label><span class="item-count">50 Stk</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>🎪</span><span>Montage-Kleinteile</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="perlen"><label for="perlen" class="item-name">Perlen (6-12mm, rot/orange/leuchtend)</label><span class="item-count">100 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="stopper"><label for="stopper" class="item-name">Gummi-Stopper (verschiedene Größen)</label><span class="item-count">50 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="powergum"><label for="powergum" class="item-name">Power Gum (0,8-1,2mm)</label><span class="item-count">5m</span></div>
+                            <div class="item"><input type="checkbox" id="shrinktubes"><label for="shrinktubes" class="item-name">Shrink Tubes (Schrumpfschläuche)</label><span class="item-count">20 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="rig_rings"><label for="rig_rings" class="item-name">Rig Rings (3-6mm)</label><span class="item-count">30 Stk</span></div>
+                            <div class="item"><input type="checkbox" id="impact_shields"><label for="impact_shields" class="item-name">Impact Shields (Aufschlagschutz)</label><span class="item-count">20 Stk</span></div>
+                        </div>
+                    </div>
+                    <div class="setup-group">
+                        <div class="setup-title"><span>📏</span><span>Vorfach-Material</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="stahlvorfach"><label for="stahlvorfach" class="item-name">Stahlvorfach 7x7 (15-25kg)</label><span class="item-count">10m</span></div>
+                            <div class="item"><input type="checkbox" id="titanvorfach"><label for="titanvorfach" class="item-name">Titanium-Vorfach (20-30kg)</label><span class="item-count">5m</span></div>
+                            <div class="item"><input type="checkbox" id="monovorfach_dick"><label for="monovorfach_dick" class="item-name">Mono-Vorfach (0,60-1,20mm sortiert)</label><span class="item-count">100m</span></div>
+                            <div class="item"><input type="checkbox" id="fluoro_vorfach"><label for="fluoro_vorfach" class="item-name">Fluorocarbon (0,50-1,00mm sortiert)</label><span class="item-count">75m</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aufbewahrung und Transport -->
+            <div class="category">
+                <div class="category-header"><span class="category-icon">🎒</span><span>Aufbewahrung und Transport</span></div>
+                <div class="category-content">
+                    <div class="setup-group">
+                        <div class="setup-title"><span>📦</span><span>Taschen und Boxen</span></div>
+                        <div class="item-list">
+                            <div class="item"><input type="checkbox" id="rutentasche"><label for="rutentasche" class="item-name">Rutentasche (gepolstert, 2,50m)</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="rollentasche"><label for="rollentasche" class="item-name">Rollentasche mit Einzelfächern</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="tackleboxen"><label for="tackleboxen" class="item-name">Tackle-Boxen (wasserdicht)</label><span class="item-count">3x</span></div>
+                            <div class="item"><input type="checkbox" id="kuehlbox"><label for="kuehlbox" class="item-name">Kühlbox (50L) für Fischtransport</label><span class="item-count">1x</span></div>
+                             <div class="item"><input type="checkbox" id="reisetasche"><label for="reisetasche" class="item-name">Große Reisetasche / Seesack für Kleidung</label><span class="item-count">1x</span></div>
+                            <div class="item"><input type="checkbox" id="wasserdicht"><label for="wasserdicht" class="item-name">Wasserdichte Packsäcke (Drybags)</label><span class="item-count">3x</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fortschrittsbalken und Zähler
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+            const total = checkboxes.length;
+            const checked = checkedBoxes.length;
+
+            if (total === 0) {
+                document.getElementById('totalCount').textContent = 0;
+                document.getElementById('checkedCount').textContent = 0;
+                document.getElementById('progressFill').style.width = '0%';
+                document.getElementById('progressBar').style.width = '0%';
+                return;
+            }
+
+            const percentage = (checked / total) * 100;
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('checkedCount').textContent = checked;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        // Event Listener für alle Checkboxen
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') {
+                updateProgress();
+                const item = e.target.closest('.item');
+                if (e.target.checked) {
+                    item.style.background = '#e8f5e8';
+                    item.style.transform = 'scale(1.02)';
+                    setTimeout(() => { item.style.transform = 'scale(1)'; }, 200);
+                } else {
+                    item.style.background = '#f8f9fa';
+                }
+            }
+        });
+
+        // LocalStorage für Persistenz
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedItems = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) { checkedItems.push(checkbox.id); }
+            });
+            localStorage.setItem('hochsee-packliste-norwegen', JSON.stringify(checkedItems));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('hochsee-packliste-norwegen');
+            if (saved) {
+                const checkedItems = JSON.parse(saved);
+                checkedItems.forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        const item = checkbox.closest('.item');
+                        if (item) { item.style.background = '#e8f5e8'; }
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') { saveProgress(); }
+        });
+
+        document.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>
